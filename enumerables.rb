@@ -56,6 +56,14 @@ module Enumerable
         end
         return arr.length
     end
+
+    def my_map
+        newArr = []
+            self.my_each do |el|
+              newArr << yield(el)
+            end
+        newArr
+    end
 end
 
 #my_each
@@ -73,5 +81,8 @@ end
 # variable =[12,16,17,18].my_none? {|num| num > 17} # 
 # puts variable
 # my_count
-count=[12,16,17,18,20,22,23].my_count {|num| num > 17}  #4
-puts count
+# count=[12,16,17,18,20,22,23].my_count {|num| num > 17}  #4
+# puts count
+# my_map
+newArray = [13,15,18,19].my_map {|num| num+1} #[14,16,19,20]
+p newArray
