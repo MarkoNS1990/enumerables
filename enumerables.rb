@@ -32,13 +32,21 @@ module Enumerable
         return true        
     end
 
-    def my_any
+    def my_any?
         variable = 0
         self.my_each do |num|
             variable+=1 if yield num           
         end
         puts true if variable > 0
         puts false if variable == 0
+    end
+
+    def my_none?
+        self.my_each do |num|
+            return false if yield (num)
+        end
+        return true  
+
     end
 end
 
@@ -50,6 +58,9 @@ end
 # myArray = [1,3,4,10,8].my_select {|num| num > 3}  #[4,10,8]
 # p myArray
 #my_all
-[12,16,17,18,19].my_all? {|num| puts num > 10}  #true
+# [12,16,17,18,19].my_all? {|num| puts num > 10}  #true
 #my_any
-[12,16,17,18].my_any {|num| num > 20}  #False
+# [12,16,17,18].my_any? {|num| num > 20}  #False
+#my_none
+variable =[12,16,17,18].my_none? {|num| num > 17} # 
+puts variable
