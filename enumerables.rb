@@ -24,6 +24,13 @@ module Enumerable
         end
      newArr
     end
+
+    def my_all?
+        self.my_each do |num|
+            return false unless yield (num)
+        end
+        return true        
+    end
 end
 
 #my_each
@@ -33,3 +40,5 @@ end
 #my_select
 myArray = [1,3,4,10,8].my_select {|num| num > 3}  #[4,10,8]
 p myArray
+#my_all
+[12,16,17,18,19].my_all? {|num| puts num > 10}  #False
