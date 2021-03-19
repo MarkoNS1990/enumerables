@@ -31,14 +31,26 @@ module Enumerable
         end
         return true        
     end
+
+    def my_any
+        variable = 0
+        self.my_each do |num|
+         if yield num 
+            variable+=1
+        
+        return true if variable > 0
+     return false
+    end
 end
 
 #my_each
-['a','b',3,'d'].my_each{|i| puts i}
+# ['a','b',3,'d'].my_each{|i| puts i}
 #my_each_with_index
-['a','b',3,'d'].my_each_with_index{|i, index| p i, index}
+# ['a','b',3,'d'].my_each_with_index{|i, index| p i, index}
 #my_select
-myArray = [1,3,4,10,8].my_select {|num| num > 3}  #[4,10,8]
-p myArray
+# myArray = [1,3,4,10,8].my_select {|num| num > 3}  #[4,10,8]
+# p myArray
 #my_all
-[12,16,17,18,19].my_all? {|num| puts num > 10}  #False
+# [12,16,17,18,19].my_all? {|num| puts num > 10}  #False
+#my_any
+[12,16,17,18,19].my_any {|num| puts num > 18}  #False
