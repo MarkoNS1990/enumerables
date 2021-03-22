@@ -64,6 +64,18 @@ module Enumerable
             end
         newArr
     end
+
+    def my_inject
+        result=self[0] # Start value for result
+         for i in 1...self.length #Iterate through array
+             result = yield(result, self[i]) #Result gets new value - result=result + current num
+            end
+         result
+     end
+end
+
+def multiply_els(arr)
+    arr.my_inject {|a,b| a*b}
 end
 
 #my_each
@@ -84,5 +96,9 @@ end
 # count=[12,16,17,18,20,22,23].my_count {|num| num > 17}  #4
 # puts count
 # my_map
-newArray = [13,15,18,19].my_map {|num| num+1} #[14,16,19,20]
-p newArray
+# newArray = [13,15,18,19].my_map {|num| num+1} #[14,16,19,20]
+# p newArray
+# my_inject
+result = [1,2,3].my_inject {|sum,num| sum+num} # result = 6
+puts result
+puts multiply_els([2,4,5])  # 40
