@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity,Metrics/ModuleLength
 module Enumerable
   def my_each
     return to_enum unless block_given?
@@ -162,3 +163,4 @@ end
 # [1, 2, 3].my_inject { |sum, num| sum + num } # result = 6
 # [1,2,3].my_inject # error - no block given
 # puts multiply_els([2, 4, 5]) # 40
+# rubocop: enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity,Metrics/ModuleLength
