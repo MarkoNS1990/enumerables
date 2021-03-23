@@ -1,5 +1,5 @@
-# enumerables
-This is project on use of enmerables in Ruby languages
+# Enumerables
+This is a project on the use of enumerable in Ruby languages.
 
 # Github link:
 
@@ -12,13 +12,13 @@ For the: [Github-link](https://github.com/MarkoNS1990/enumerables/tree/enumerabl
 
 ## Enumerables
 
-- Used Ruby Language for dedine various methods.
+- Used Ruby Language to define various methods.
 
 ## Methods
 
-- We write methods about ,my_each, my_each_with_index, my_select, my_all?, my_any?, my_none?, my_count, my_map, my_inject and last we use proc
+- We write methods about,my_each, my_each_with_index, my_select,#my_all?# my_any? #my_none?# my_count, #my_map, #my_inject, and last we use proc im #my_map
 
-# Technology Used
+# Languages Used
 
 - Ruby
 
