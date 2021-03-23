@@ -104,8 +104,8 @@ end
 # count=[12,16,17,18,20,22,23].my_count {|num| num > 17}  #4
 # puts count
 # my_map
-add= Proc.new {|num| num+1}
-newArray = [13,15,18,19].my_map (add) #[14,16,19,20]
+subtract= Proc.new {|num| num-1}
+newArray = [13,15,18,19].my_map (subtract) #[12,14,17,18]
 # newArray = [13,15,18,19].my_map {|num| num+1} #[14,16,19,20]
 p newArray
 # my_inject
