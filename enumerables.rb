@@ -1,21 +1,29 @@
 module Enumerable
   def my_each
+    return to_enum unless block_given?
+
     i = 0 # iterator
     while i < length
       yield self[i]
       i += 1
     end
+    self
   end
 
   def my_each_with_index
+    return to_enum unless block_given?
+
     i = 0
     while i < length
       yield self[i], i
       i += 1
     end
+    self
   end
 
   def my_select
+    return to_enum unless block_given?
+
     new_arr = []
     i = 0
     while i < length
@@ -84,7 +92,8 @@ def multiply_els(arr)
 end
 
 # my_each
-['a', 'b', 3, 'd'].my_each { |i| puts i }
+p ['a', 'b', 3, 'd'].my_each {|num|  num}
+p ['a', 'b', 3, 'd'].my_each # return enum if no block
 # my_each_with_index
 ['a', 'b', 3, 'd'].my_each_with_index { |i, index| p i, index }
 # my_select
