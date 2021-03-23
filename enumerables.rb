@@ -4,8 +4,8 @@ module Enumerable
     return to_enum unless block_given?
 
     i = 0 # iterator
-    while i < length
-      yield self[i]
+    while i < to_a.length
+      yield to_a[i]
       i += 1
     end
     self
@@ -15,8 +15,8 @@ module Enumerable
     return to_enum unless block_given?
 
     i = 0
-    while i < length
-      yield self[i], i
+    while i < to_a.length
+      yield to_a[i], i
       i += 1
     end
     self
@@ -27,8 +27,8 @@ module Enumerable
 
     new_arr = []
     i = 0
-    while i < length
-      new_arr << self[i] if yield self[i]
+    while i < to_a.length
+      new_arr << to_a[i] if yield to_a[i]
       i += 1
     end
     new_arr
@@ -36,17 +36,17 @@ module Enumerable
 
   def my_all?(item1 = nil)
     if block_given? && !item1
-      my_each { |i| return false if yield(i) == false }
+      to_a.my_each { |i| return false if yield(i) == false }
       return true
     elsif item1.nil?
-      my_each { |i| return false if i.nil? || i == false }
+      to_a.my_each { |i| return false if i.nil? || i == false }
     elsif item1.is_a? Class
-      my_each { |i| return false unless i.is_a?(item1) }
+      to_a.my_each { |i| return false unless i.is_a?(item1) }
       return true
     elsif !item1.nil? && item1.instance_of?(Regexp)
-      my_each { |i| return false unless item1.match(i) }
+      to_a.my_each { |i| return false unless item1.match(i) }
     else
-      my_each { |i| return false if i != item1 }
+      to_a.my_each { |i| return false if i != item1 }
     end
     true
   end
