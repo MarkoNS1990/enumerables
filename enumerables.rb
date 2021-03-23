@@ -68,20 +68,11 @@ module Enumerable
   end
 
   def my_none?(item1 = nil)
-    if block_given? && !item1
-      to_a.my_each { |i| return false unless yield(i) == false }
-      return true
-    elsif item1.nil?
-      to_a.my_each { |i| return true if i.nil? || i == true }
-    elsif item1.is_a? Class
-      to_a.my_each { |i| return true unless i.is_a?(item1) }
-      return false
-    elsif !item1.nil? && item1.instance_of?(Regexp)
-      to_a.my_each { |i| return true unless item1.match(i) }
+    if block_given?
+      !my_any?(&Proc.new)
     else
-      to_a.my_each { |i| return true if i != item1 }
+      !my_any?(item1)
     end
-    false
   end
 
   def my_count(items1 = nil)
@@ -136,31 +127,4 @@ def multiply_els(arr)
   arr.my_inject(:*)
 end
 
-# # my_each
-# p ['a', 'b', 3, 'd'].my_each {|num|  num}
-# p ['a', 'b', 3, 'd'].my_each # return enum if no block
-# # my_each_with_index
-# ['a', 'b', 3, 'd'].my_each_with_index { |i, index| p i, index }
-# # my_select
-# my_array1 = [1, 3, 4, 10, 8].my_select { |num| num > 3 } # [4,10,8]
-# p my_array1
-# my_all
-# arr1=[nil,18].my_all? { |num|  num == 18  } # false
-# p arr1
-# my_any
-# arr2=[12, 16, 17, 18].my_any? { |num| num > 20 } # False
-# p arr2
-# # my_none
-# variable = [11,22,21,12,34].my_none? { |num| num < 15 } #
-# puts variable
-# # my_count
-# count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num <17 } # 4
-# puts count
-# # my_map
-# new_arr2 = [13, 15, 18, 19].my_map { |num| num + 1 } # [14,16,19,20]
-# p new_arr2
-# # my_inject
-# [1, 2, 3].my_inject { |sum, num| sum + num } # result = 6
-# [1,2,3].my_inject # error - no block given
-# puts multiply_els([2, 4, 5]) # 40
 # rubocop: enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity,Metrics/ModuleLength
