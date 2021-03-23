@@ -101,6 +101,7 @@ module Enumerable
 
   def my_map(items1 = nil)
     return to_enum if !block_given? && !items1
+
     items = clone.to_a
     items.my_each_with_index do |item, i|
       items[i] = if items1
@@ -112,17 +113,26 @@ module Enumerable
     items
   end
 
-  def my_inject
-    result = self[0] # Start value for result
-    (1...length).each do |i| # Iterate through array
-      result = yield(result, self[i]) # Result gets new value - result=result + current num
+  def my_inject(value = nil, symbol = nil)
+    if (!value.nil? && symbol.nil?) && (value.is_a?(Symbol) || value.is_a?(String))
+      symbol = value
+      value = nil
     end
-    result
+
+    raise LocalJumpError, 'no block given' if !block_given? && symbol.nil? && value.nil?
+
+    if block_given? && symbol.nil?
+      to_a.my_each { |item| value = value.nil? ? item : yield(value, item) }
+    else
+
+      to_a.my_each { |item| value = value.nil? ? item : value.send(symbol, item) }
+    end
+    value
   end
 end
 
 def multiply_els(arr)
-  arr.my_inject { |a, b| a * b }
+  arr.my_inject(:*)
 end
 
 # # my_each
@@ -143,12 +153,12 @@ end
 # variable = [11,22,21,12,34].my_none? { |num| num < 15 } #
 # puts variable
 # # my_count
-count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num <17 } # 4
-puts count
+# count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num <17 } # 4
+# puts count
 # # my_map
 # new_arr2 = [13, 15, 18, 19].my_map { |num| num + 1 } # [14,16,19,20]
 # p new_arr2
 # # my_inject
-# result = [1, 2, 3].my_inject { |sum, num| sum + num } # result = 6
-# puts result
+# [1, 2, 3].my_inject { |sum, num| sum + num } # result = 6
+# [1,2,3].my_inject # error - no block given
 # puts multiply_els([2, 4, 5]) # 40
