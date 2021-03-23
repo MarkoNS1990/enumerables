@@ -53,33 +53,33 @@ module Enumerable
 
   def my_any?(item1 = nil)
     if block_given?
-      my_each { |i| return true if yield(i) }
+      to_a.my_each { |i| return true if yield(i) }
       return false
     elsif item1.nil?
-      my_each { |i| return true if i }
+      to_a.my_each { |i| return true if i }
     elsif !item1.nil? && (item1.is_a? Class)
-      my_each { |i| return true if i.is_a?(item1) }
+      to_a.my_each { |i| return true if i.is_a?(item1) }
     elsif !item1.nil? && item1.instance_of?(Regexp)
-      my_each { |i| return true if item1.match(i) }
+      to_a.my_each { |i| return true if item1.match(i) }
     else
-      my_each { |i| return true if i == item1 }
+      to_a.my_each { |i| return true if i == item1 }
     end
     false
   end
 
   def my_none?(item1 = nil)
     if block_given? && !item1
-      my_each { |i| return false unless yield(i) == false }
+      to_a.my_each { |i| return false unless yield(i) == false }
       return true
     elsif item1.nil?
-      my_each { |i| return true if i.nil? || i == true }
+      to_a.my_each { |i| return true if i.nil? || i == true }
     elsif item1.is_a? Class
-      my_each { |i| return true unless i.is_a?(item1) }
+      to_a.my_each { |i| return true unless i.is_a?(item1) }
       return false
     elsif !item1.nil? && item1.instance_of?(Regexp)
-      my_each { |i| return true unless item1.match(i) }
+      to_a.my_each { |i| return true unless item1.match(i) }
     else
-      my_each { |i| return true if i != item1 }
+      to_a.my_each { |i| return true if i != item1 }
     end
     false
   end
