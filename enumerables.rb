@@ -68,8 +68,8 @@ module Enumerable
 
   def my_none?(item1 = nil)
     if block_given? && !item1
-      my_each { |i| return true if yield(i) == true }
-      return false
+      my_each { |i| return false unless yield(i) == false }
+      return true
     elsif item1.nil?
       my_each { |i| return true if i.nil? || i == true }
     elsif item1.is_a? Class
@@ -130,14 +130,14 @@ end
 # arr1=[nil,18].my_all? { |num|  num == 18  } # false
 # p arr1
 # my_any
-arr2=[12, 16, 17, 18].my_any? { |num| num > 20 } # False
-p arr2
+# arr2=[12, 16, 17, 18].my_any? { |num| num > 20 } # False
+# p arr2
 # # my_none
-# variable = [12, 16, 17, 18].my_none? { |num| num > 17 } #
+# variable = [11,22,21,12,34].my_none? { |num| num < 15 } #
 # puts variable
 # # my_count
-# count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num > 17 } # 4
-# puts count
+count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num > 17 } # 4
+puts count
 # # my_map
 # new_arr2 = [13, 15, 18, 19].my_map { |num| num + 1 } # [14,16,19,20]
 # p new_arr2
