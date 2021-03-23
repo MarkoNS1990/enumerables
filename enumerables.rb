@@ -34,6 +34,8 @@ module Enumerable
   end
 
   def my_all?
+
+    
     my_each do |num|
       return false unless yield num
     end
