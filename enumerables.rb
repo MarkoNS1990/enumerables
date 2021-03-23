@@ -83,26 +83,33 @@ module Enumerable
     false
   end
 
-  def my_count
-    arr = []
-    my_each do |num|
-      arr << num if yield num
+  def my_count(items1 = nil)
+    if items1
+      selected = my_select { |i| i == items1 }
+      selected.size
+    else
+      return to_a.size unless block_given?
+
+      a = 0
+
+      my_each do |i|
+        yield(i) && a += 1
+      end
+      a
     end
-    arr.length
   end
 
-  def my_map(&proc1)
-    new_arr = []
-    if block_given?
-      my_each do |el|
-        new_arr << yield(el)
-      end
-    else
-      my_each do |el|
-        new_arr << proc1.call(el)
-      end
+  def my_map(items1 = nil)
+    return to_enum if !block_given? && !items1
+    items = clone.to_a
+    items.my_each_with_index do |item, i|
+      items[i] = if items1
+                   items1.call(item)
+                 else
+                   yield item
+                 end
     end
-    new_arr
+    items
   end
 
   def my_inject
@@ -136,7 +143,7 @@ end
 # variable = [11,22,21,12,34].my_none? { |num| num < 15 } #
 # puts variable
 # # my_count
-count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num > 17 } # 4
+count = [12, 16, 17, 18, 20, 22, 23].my_count { |num| num <17 } # 4
 puts count
 # # my_map
 # new_arr2 = [13, 15, 18, 19].my_map { |num| num + 1 } # [14,16,19,20]
