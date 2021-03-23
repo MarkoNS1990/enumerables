@@ -56,7 +56,7 @@ module Enumerable
     arr.length
   end
 
-  def my_map(proc1)
+  def my_map(&proc1)
     new_arr = []
     if block_given?
       my_each do |el|
