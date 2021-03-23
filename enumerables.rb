@@ -50,20 +50,37 @@ module Enumerable
     true
   end
 
-  def my_any?
-    variable = 0
-    my_each do |num|
-      variable += 1 if yield num
+  def my_any?(item1 = nil)
+    if block_given?
+      my_each { |i| return true if yield(i) }
+      return false
+    elsif item1.nil?
+      my_each { |i| return true if i }
+    elsif !item1.nil? && (item1.is_a? Class)
+      my_each { |i| return true if i.is_a?(item1) }
+    elsif !item1.nil? && item1.instance_of?(Regexp)
+      my_each { |i| return true if item1.match(i) }
+    else
+      my_each { |i| return true if i == item1 }
     end
-    puts true if variable.positive?
-    puts false if variable.zero?
+    false
   end
 
-  def my_none?
-    my_each do |num|
-      return false if yield num
+  def my_none?(item1 = nil)
+    if block_given? && !item1
+      my_each { |i| return true if yield(i) == true }
+      return false
+    elsif item1.nil?
+      my_each { |i| return true if i.nil? || i == true }
+    elsif item1.is_a? Class
+      my_each { |i| return true unless i.is_a?(item1) }
+      return false
+    elsif !item1.nil? && item1.instance_of?(Regexp)
+      my_each { |i| return true unless item1.match(i) }
+    else
+      my_each { |i| return true if i != item1 }
     end
-    true
+    false
   end
 
   def my_count
@@ -113,7 +130,8 @@ end
 # arr1=[nil,18].my_all? { |num|  num == 18  } # false
 # p arr1
 # my_any
-[12, 16, 17, 18].my_any? { |num| num > 20 } # False
+arr2=[12, 16, 17, 18].my_any? { |num| num > 20 } # False
+p arr2
 # # my_none
 # variable = [12, 16, 17, 18].my_none? { |num| num > 17 } #
 # puts variable
