@@ -57,11 +57,19 @@ module Enumerable
         return arr.length
     end
 
-    def my_map
+    def my_map(proc1)
         newArr = []
+        if block_given?
             self.my_each do |el|
               newArr << yield(el)
             end
+
+        else
+            self.my_each do |el|
+                newArr << proc1.call(el)
+            end
+        end
+
         newArr
     end
 
@@ -96,9 +104,11 @@ end
 # count=[12,16,17,18,20,22,23].my_count {|num| num > 17}  #4
 # puts count
 # my_map
+add= Proc.new {|num| num+1}
+newArray = [13,15,18,19].my_map (add) #[14,16,19,20]
 # newArray = [13,15,18,19].my_map {|num| num+1} #[14,16,19,20]
-# p newArray
+p newArray
 # my_inject
-result = [1,2,3].my_inject {|sum,num| sum+num} # result = 6
-puts result
-puts multiply_els([2,4,5])  # 40
+# result = [1,2,3].my_inject {|sum,num| sum+num} # result = 6
+# puts result
+# puts multiply_els([2,4,5])  # 40
