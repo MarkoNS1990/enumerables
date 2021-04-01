@@ -32,7 +32,7 @@ describe '#my_all' do
 end
 
 describe '#my_any' do
-    let(:words) { %w[dog door rod blade] }
+  let(:words) { %w[dog door rod blade] }
   it 'should return true if any of elements of an array are type of Integer' do
     expect(words.my_any?(Integer) == words.any?(Integer)).to eql(true)
   end
@@ -219,7 +219,7 @@ end
 describe '#my_select' do
   it 'should return true if block returns false or nil' do
     expect([1, 2, 3, 4, 5].my_select(&:odd?) == [1, 2, 3, 4, 5].select(&:odd?)).to eql(true)
-    expect([1, 2, 3, 4, 5].my_select(&:odd?) == [2,4,5,7]).to eql(false)
+    expect([1, 2, 3, 4, 5].my_select(&:odd?) == [2, 4, 5, 7]).to eql(false)
   end
 end
 
