@@ -28,13 +28,8 @@ For the: [Github-link](https://github.com/MarkoNS1990/enumerables/tree/enumerabl
 
 ### Testing instructions
 
-- `rspec spec/data_type_test.rb` testing what type of class is being returned
-- `rspec spec/my_all_test.rb` testing of #my_all
-- `rspec spec/my_any_test.rb` testing of #my_any
-- `rspec spec/my_each_test.rb` testing of #my_each
-- `rspec spec/my_inject_test.rb` testing of #my_inject
-- `rspec spec/my_map_test.rb` testing of #my_map
-- `rspec spec/my_select_test.rb` testing of #my_select
+-to run tests cd into enumerables then type in terminal:
+`rspec spec/enumerables_test.rb`
 
 # Authors 1
 
