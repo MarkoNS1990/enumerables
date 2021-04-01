@@ -39,7 +39,7 @@ describe '#my_inject' do
     expect(array.my_inject(20, :*) == array.inject(20, :*)).to eql(true)
   end
 
-  it ' when a sym is specified with an initial value: sym as named methid range ' do
+  it ' when a sym is specified with an initial value: sym as named method range ' do
     expect(range.my_inject(2, :*) == range.inject(2, :*)).to eql(true)
   end
 end
