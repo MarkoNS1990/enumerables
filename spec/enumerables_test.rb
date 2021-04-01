@@ -116,8 +116,26 @@ describe '#my_any' do
     expect(words.my_any?('cat') == words.any?('cat')).to eql(true)
   end
 end
-
 #   my_each tests
+
+describe '#my_each' do
+  it 'should check each element of an array' do
+    expect(%w[aca marijan marko].my_each do |x|
+             p x != 'aca'
+           end == %w[aca marijan marko].each do |x|
+                    p x != 'aca'
+                  end).to eql(true)
+  end
+  it 'should check each element of an array' do
+    expect([1, 2, 3, 4, 5].my_each do |x|
+             p x > 3
+           end == [1, 2, 3, 4, 5].each do |x|
+                    p x > 3
+                  end).to eql(true)
+  end
+end
+
+#   my_each_with_index tests
 
 describe '#my_each_with_index' do
   it 'should check each element of an array' do
@@ -125,6 +143,13 @@ describe '#my_each_with_index' do
              p x != 'aca'
            end == %w[aca marijan marko].each do |x|
                     p x != 'aca'
+                  end).to eql(true)
+  end
+  it 'should check each element of an array' do
+    expect([1, 2, 3, 4, 5].my_each_with_index do |x|
+             p x > 3
+           end == [1, 2, 3, 4, 5].each do |x|
+                    p x > 3
                   end).to eql(true)
   end
 end
@@ -219,14 +244,18 @@ end
 describe '#my_select' do
   it 'should return true if block returns false or nil' do
     expect([1, 2, 3, 4, 5].my_select(&:odd?) == [1, 2, 3, 4, 5].select(&:odd?)).to eql(true)
-    expect([1, 2, 3, 4, 5].my_select(&:odd?) == [2, 4, 5, 7]).to eql(false)
+  end
+  it 'should return true if block returns false or nil' do
+    expect([1, 2, 3, 4, 5].my_select { |n| n > 3 } == [1, 2, 3, 4, 5].select { |n| n > 3 }).to eql(true)
   end
 end
 
 #   multiply_els test
 describe '#multiply_els' do
-  it 'should return calculation based on #my_inject' do
+  it 'should return true based on calc of #my_inject' do
     expect(multiply_els([2, 4, 5]) == 40).to eql(true)
+  end
+  it 'should return false based on calc of  #my_inject' do
     expect(multiply_els([2, 4, 5]) == 50).to eql(false)
   end
 end
