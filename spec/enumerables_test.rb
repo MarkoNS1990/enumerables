@@ -1,43 +1,4 @@
 require_relative '../enumerables'
-
-# Data_type tests
-describe '#my_each' do
-  it 'should return true if it is an Enumerator' do
-    expect([1, 2, 3].my_each.instance_of?(Enumerator)).to eql(true)
-  end
-end
-
-describe '#my_each_with_index' do
-  it 'should return true if it is an Enumerator' do
-    expect([1, 2, 3].my_each_with_index.instance_of?(Enumerator)).to eql(true)
-  end
-end
-
-describe '#my_select' do
-  it 'should return true if it is an Enumerator' do
-    expect([1, 2, 3].my_select.instance_of?(Enumerator)).to eql(true)
-  end
-end
-
-describe '#my_all' do
-  let(:array) { Array.new(100) { rand(0...9) } }
-
-  it 'should return true if all elements are of Integer type' do
-    expect(array.my_all?(Integer) == array.all?(Integer)).to eql(true)
-  end
-
-  it 'should return true if all elements are of Numeric type' do
-    expect(array.my_all?(Numeric) == array.all?(Numeric)).to eql(true)
-  end
-end
-
-describe '#my_any' do
-  let(:words) { %w[dog door rod blade] }
-  it 'should return true if any of elements of an array are type of Integer' do
-    expect(words.my_any?(Integer) == words.any?(Integer)).to eql(true)
-  end
-end
-
 #   #my_all tests
 describe '#my_all' do
   let(:range) { Range.new(5, 50) }
@@ -85,6 +46,14 @@ describe '#my_all' do
   it 'pattern other than regex or class given return true if all collection matches the pattern of global var' do
     expect(array.my_all?(3) == array.all?(3)).to eql(true)
   end
+
+  it 'should return true if all elements are of Integer type' do
+    expect(array.my_all?(Integer) == array.all?(Integer)).to eql(true)
+  end
+
+  it 'should return true if all elements are of Numeric type' do
+    expect(array.my_all?(Numeric) == array.all?(Numeric)).to eql(true)
+  end
 end
 
 #   #my_any tests
@@ -115,6 +84,10 @@ describe '#my_any' do
   it 'should return true when string is passed as an argument if any of the collection matches the given string' do
     expect(words.my_any?('cat') == words.any?('cat')).to eql(true)
   end
+
+  it 'should return true if any of elements of an array are type of Integer' do
+    expect(words.my_any?(Integer) == words.any?(Integer)).to eql(true)
+  end
 end
 #   my_each tests
 
@@ -132,6 +105,9 @@ describe '#my_each' do
            end == [1, 2, 3, 4, 5].each do |x|
                     p x > 3
                   end).to eql(true)
+  end
+  it 'should return true if it is an Enumerator' do
+    expect([1, 2, 3].my_each.instance_of?(Enumerator)).to eql(true)
   end
 end
 
@@ -151,6 +127,9 @@ describe '#my_each_with_index' do
            end == [1, 2, 3, 4, 5].each do |x|
                     p x > 3
                   end).to eql(true)
+  end
+  it 'should return true if it is an Enumerator' do
+    expect([1, 2, 3].my_each_with_index.instance_of?(Enumerator)).to eql(true)
   end
 end
 
@@ -247,6 +226,9 @@ describe '#my_select' do
   end
   it 'should return true if block returns false or nil' do
     expect([1, 2, 3, 4, 5].my_select { |n| n > 3 } == [1, 2, 3, 4, 5].select { |n| n > 3 }).to eql(true)
+  end
+  it 'should return true if it is an Enumerator' do
+    expect([1, 2, 3].my_select.instance_of?(Enumerator)).to eql(true)
   end
 end
 
