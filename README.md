@@ -11,6 +11,9 @@ This is a project on the use of enumerable in Ruby languages.
 
 For the: [Github-link](https://github.com/MarkoNS1990/enumerables/tree/enumerables)
 
+- To install rspec `gem install rspec`
+- Rspec is used for testing purposes
+
 ## Enumerables
 
 - Used Ruby Language to define various methods.
@@ -22,11 +25,6 @@ For the: [Github-link](https://github.com/MarkoNS1990/enumerables/tree/enumerabl
 ## Languages Used
 
 - Ruby
-
-## Testing
-
-- To install rspec `gem install rspec`
-- Rspec is used for testing purposes
 
 ### Testing instructions
 
