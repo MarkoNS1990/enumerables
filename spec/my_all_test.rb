@@ -17,7 +17,7 @@ describe '#my_all' do
     expect(array.my_all?(&false_block) == array.all?(&false_block)).to eql(true)
   end
 
-  it 'should return true if block returns false or nil:range ' do
+  it 'should return true if block returns false or nil:range' do
     expect(range.my_all?(&false_block) == range.all?(&false_block)).to eql(true)
   end
 
@@ -37,9 +37,13 @@ describe '#my_all' do
     expect(words.my_all?(/o/) == words.all?(/o/)).to eql(true)
   end
 
-  it 'when pattern other than regex or class is given return true if all of the collection matches the pattern' do
+  it 'pattern other than regex or class given return true if all collection matches the pattern of local var' do
     array = []
     10.times { array << 3 }
+    expect(array.my_all?(3) == array.all?(3)).to eql(true)
+  end
+
+  it 'pattern other than regex or class given return true if all collection matches the pattern of global var' do
     expect(array.my_all?(3) == array.all?(3)).to eql(true)
   end
 end
