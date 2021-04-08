@@ -151,7 +151,21 @@ describe 'Enumerables' do
     end 
   end
 
-  
-  
+  describe 'my_count method' do   
+
+    it 'return length of array' do        
+        expect(arr.my_count).to eq(arr.length)
+    end 
+
+    it 'return the count of the repeated element' do        
+        arr1=[1,2,2,3,2]
+        expect(arr1.my_count(2)).to eq(3)
+    end  
+    
+    it 'return the count of the odd element' do        
+        arr1=[1,2,2,3,2]
+        expect(arr1.my_count{|ele| ele%2==1}).to eq(2)
+    end
+  end
 
 end
