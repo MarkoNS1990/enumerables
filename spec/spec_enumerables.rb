@@ -10,8 +10,8 @@ describe 'Enumerables' do
   let(:empty_array) { [] }
   
   describe 'my_each method' do
-    it 'when no block it should return Enumerable' do
-        expect(arr.my_each).to be_a(Enumerable)
+    it 'when no block it should return Enumerator' do
+        expect(arr.my_each).to be_a(Enumerator)
     end
 
     it 'when block given then should execute the block for each element' do
@@ -27,14 +27,14 @@ describe 'Enumerables' do
   end
 
   describe 'my_each_with _index method' do
-    it 'when no block it should return Enumerable' do
-        expect(arr.my_each_with_index).to be_a(Enumerable)
+    it 'when no block it should return Enumerator' do
+        expect(arr.my_each_with_index).to be_a(Enumerator)
     end     
   end
 
   describe 'my_select method' do
-    it 'when no block it should return Enumerable' do
-        expect(arr.my_select).to be_a(Enumerable)
+    it 'when no block it should return Enumerator' do
+        expect(arr.my_select).to be_a(Enumerator)
     end
 
     it 'when block given then should return array which satisfy condition' do
@@ -165,6 +165,35 @@ describe 'Enumerables' do
     it 'return the count of the odd element' do        
         arr1=[1,2,2,3,2]
         expect(arr1.my_count{|ele| ele%2==1}).to eq(2)
+    end
+
+    it 'return the count of the repeated element' do
+        expect(empty_array.my_count).to eq(0)
+    end 
+  end
+
+  describe 'my_map method' do
+    it 'when no block it should return Enumerator' do
+        expect(arr.my_map).to be_a(Enumerator)
+    end
+
+    it 'should return the array after calculation with each element' do
+        arr1 = [3,4,5]
+        arr2 = [6,8,10]
+        arr3=arr1.my_map { |ele| ele*2 }
+        expect(arr3).to eq(arr2)
+    end 
+
+    it 'should returns thearray with all elements in upper case' do
+        expect(%w[Deepak].my_map(&:upcase)).to eql(%w[DEEPAK])
+    end
+    
+    it 'should returns ehe array with all elements converted to integrs' do
+        expect(%w[1 2 3 4 5].my_map(&:to_i)).to eql([1, 2, 3, 4, 5])
+    end
+
+    it 'should returns the class of each element in the given array' do
+        expect([10, 'sweet', :a].my_map(&:class)).to eql([Integer, String, Symbol])
     end
   end
 
