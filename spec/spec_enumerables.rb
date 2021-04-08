@@ -224,4 +224,10 @@ describe 'Enumerables' do
         expect((1..4).my_inject(:+)).to eql(10)
     end
   end
+
+  describe 'multiply_els method' do
+    it 'returns result from multiply_els method' do
+      expect(multiply_els(1..5)).to eq(120)
+    end
+  end
 end
