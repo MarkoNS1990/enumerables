@@ -49,23 +49,7 @@ describe 'Enumerables' do
     end      
   end
 
-  describe 'my_all? method' do
-    it 'when no block it should return true' do
-        expect(arr.my_all?).to be true
-    end
-
-    it 'should return true if empty array' do
-        expect(empty_array.my_all?).to be true
-    end
-
-    it 'when block given then should return true if all ekement satisfy condition' do   
-        expect(arr.my_all? { |ele| ele > 0}).to be true
-    end 
-
-    it 'when block given then should return false if any one of element not satisfy the condition' do
-        expect(arr.my_all? { |ele| ele > 4}).not_to be true
-    end      
-  end
+ 
 
   describe 'my_all? method' do
     it 'when no block it should return true' do
@@ -76,40 +60,35 @@ describe 'Enumerables' do
         expect(empty_array.my_all?).to be true
     end
 
-    it 'when block given then should return true if all element satisfy condition' do   
+    it 'when block given then should return true if all element satisfy the condition' do   
         expect(arr.my_all? { |ele| ele > 0}).to be true
     end 
 
+    it 'when parameter given then should return true if all element satisfy the condition' do
+        expect([1,2,3,4].my_all? { |ele| ele > 0}).to be true
+    end
+
     it 'when block given then should return false if any one of element not satisfy the condition' do
         expect(arr.my_all? { |ele| ele > 4}).not_to be true
-    end   
+    end 
     
     it 'when parameter given then should return false if any one of element not satisfy the condition' do
         expect([1,2,3,4].my_all? { |ele| ele == 4}).not_to be true
+    end
+
+    it 'when parameter given then should return false if any one of element doesntsatisfy the condition' do
+        expect([1, 2.91, 3, 4].my_all?(Float)).not_to be true
     end
     
     it 'when null is an element it should return false' do
         expect([1,2,3,nil].my_all?).not_to be true
     end
+    it 'when false is an element it should return false' do
+        expect(false_array.my_all?).not_to be true
+    end
   end
 
-  describe 'my_all? method' do
-    it 'when no block it should return true' do
-        expect(arr.my_all?).to be true
-    end
 
-    it 'should return true if empty array' do
-        expect(empty_array.my_all?).to be true
-    end
-
-    it 'when block given then should return true if all ekement satisfy condition' do   
-        expect(arr.my_all? { |ele| ele > 0}).to be true
-    end 
-
-    it 'when block given then should return false if any one of element not satisfy the condition' do
-        expect(arr.my_all? { |ele| ele > 4}).not_to be true
-    end      
-  end
 
   describe 'my_any? method' do
     it 'when no block it should return true if element in the array' do
@@ -128,6 +107,10 @@ describe 'Enumerables' do
         expect([1,2,3,4].my_any? { |ele| ele == 4}).to be true
     end
 
+    it 'when parameter given then should return true if any one of element satisfy the condition' do
+        expect([1, 2.91, 3, 4].my_any?(Float)).to be true
+    end
+
     it 'should return false if empty array' do
         expect(empty_array.my_any?).not_to be true
     end    
@@ -139,5 +122,45 @@ describe 'Enumerables' do
     it 'when parameter given then should return false if all of element not satisfy the condition' do
         expect([1,2,3,4].my_any? { |ele| ele > 5}).not_to be true
     end
+    
   end
+
+  describe 'my_none? method' do
+    it 'when null and false is an element it should return true' do
+        expect(false_array.my_none?).to be true
+    end
+
+    it 'should return true if empty array' do
+        expect(empty_array.my_none?).to be true
+    end
+
+    it 'when block given then should return true if no element satisfy the condition' do   
+        expect(arr.my_none? { |ele| ele < 0}).to be true
+    end 
+
+    it 'when parameter given then should return true if no element satisfy the condition' do
+        expect([1,2,3,4].my_none? { |ele| ele < 0}).to be true
+    end
+
+    it 'when block given then should return false if any one of element satisfy the condition' do
+        expect(arr.my_none? { |ele| ele == 4}).not_to be true
+    end   
+    
+    it 'when parameter given then should return false if any one of element satisfy the condition' do
+        expect([1, 2.91, 3, 4].my_none?(Float)).not_to be true
+    end 
+  end
+
+  describe 'my_count method' do   
+
+    it 'return length of array' do        
+        expect(arr.my_count).to eq(arr.length)
+    end 
+
+    it 'when false given in block then return empty array' do        
+        arr1=[1,2,2,3,2]
+        expect(arr1.my_count(2)).to eq(3)
+    end      
+  end
+
 end
