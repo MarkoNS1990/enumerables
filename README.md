@@ -30,7 +30,7 @@ For the: [Github-link](https://github.com/MarkoNS1990/enumerables/tree/enumerabl
 `$ rspec --init`
 ### Rspec check
 
-1. To Check enumerables:- `rspec spec/spec_enumerables.rb`
+- To Check enumerables:- `rspec spec/spec_enumerables.rb`
 
 # Authors 1
 - Name :Marko Zecevic
