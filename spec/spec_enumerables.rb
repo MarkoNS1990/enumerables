@@ -197,4 +197,31 @@ describe 'Enumerables' do
     end
   end
 
+  describe 'my_inject method' do  
+    it 'Returns local jump error if no block given' do
+        expect { arr.my_inject }.to raise_error(LocalJumpError)
+    end
+
+    it 'should return the sum' do
+        arr2 = [5,6,7,8,9,10]
+        arr3=arr2.my_inject { |sum,n| sum+n }
+        expect(arr3).to eq(45)
+    end 
+
+    it 'should return the product' do
+        arr2 = [5,6,7,8,9,10]
+        arr3=arr2.my_inject(1) { |product,n| product * n }
+        expect(arr3).to eq(151200)
+    end    
+    
+    it 'should return the longest word' do
+        longest = %w[ cat sheep bear ]
+        long_word=longest.my_inject { |memo, word| memo.length > word.length ? memo : word }
+        expect(long_word).to eq('sheep')
+    end 
+
+    it 'should return the sum of all element' do
+        expect((1..4).my_inject(:+)).to eql(10)
+    end
+  end
 end
