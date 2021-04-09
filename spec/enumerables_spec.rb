@@ -1,6 +1,6 @@
 require_relative '../enumerables'
 require 'rspec'
-# To Run "rspec spec/spec_enumerables.rb"
+# To Run "rspec spec/enumerables_spec.rb"
 
 describe 'Enumerables' do
   let(:arr) { [1, 2, 3, 4, 5] }
